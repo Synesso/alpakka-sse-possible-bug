@@ -52,7 +52,7 @@ object Main {
     val work: Future[Done] =
       EventSource(Uri("https://horizon.stellar.org/transactions"), requestWithDebugging, Some("85025096736968704"), 1.second)
         .mapConcat{ case ServerSentEvent(data, eventType, id, retry) =>
-          print(s"eventType: $eventType, id:$id, retry:$retry, data:")
+          print(s"eventType: $eventType, id:$id, retry:$retry, data:$data")
           (if (eventType.contains("open")) None else Some(data)).to[collection.immutable.Iterable]
         }.toMat(Sink.foreach(println))(Keep.right).run()
 
