@@ -20,6 +20,13 @@ import scala.util.Success
 //noinspection TypeAnnotation
 object Main {
 
+  /**
+    * `curl -H "Accept: text/event-stream" -H "Last-Event-ID: 85025096736968704" "https://horizon.stellar.org/transactions"`
+    * returns a seemingly valid SSE response.
+    * The same data is parsed correctly by the utility at:
+    *   https://www.stellar.org/laboratory/#explorer?resource=transactions&endpoint=all&values=eyJjdXJzb3IiOiI4NTAyNTA5NjczNjk2ODcwNCIsInN0cmVhbWluZyI6dHJ1ZX0%3D&network=public
+    * But the following code fails to find any events.
+    */
   def main(args: Array[String]): Unit = {
 
     implicit val system = ActorSystem("sse-test")
